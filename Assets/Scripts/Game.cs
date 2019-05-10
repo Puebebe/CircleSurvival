@@ -10,6 +10,7 @@ public class Game : MonoBehaviour
     [SerializeField] private Text scoreUI;
     [SerializeField] private GameObject lossPanel;
     private static event Action GameEnded;
+    private const string GAMEPLAY_SCENE = "Gameplay";
 
     public float Score
     {
@@ -32,12 +33,15 @@ public class Game : MonoBehaviour
 
     public void StartNewGame()
     {
-        SceneManager.LoadScene("Gameplay");
+        SceneManager.LoadScene(GAMEPLAY_SCENE);
     }
 
     private void Start()
     {
-        GameEnded += ShowLossPanel;
+        if (SceneManager.GetActiveScene().name == GAMEPLAY_SCENE)
+        {
+            GameEnded += ShowLossPanel;
+        }
     }
 
     private void ShowLossPanel()

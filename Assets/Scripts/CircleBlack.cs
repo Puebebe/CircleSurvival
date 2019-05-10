@@ -13,5 +13,6 @@ public class CircleBlack : Circle
     private void Lose()
     {
         Debug.Log("przegranko (czarne)");
+        Game.EndGame();
     }
 }

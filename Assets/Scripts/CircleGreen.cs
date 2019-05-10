@@ -24,6 +24,7 @@ public class CircleGreen : Circle
     {
         Debug.Log("przegranko (zielone)");
         Destroy(gameObject);
+        Game.EndGame();
     }
 
     private void SetFillAmount()

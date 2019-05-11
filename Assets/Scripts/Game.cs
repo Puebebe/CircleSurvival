@@ -12,7 +12,8 @@ public class Game : MonoBehaviour
     [SerializeField] private GameObject lossPanel;
     private static event Action GameEnded;
     private const string GAMEPLAY_SCENE = "Gameplay";
-
+    private const string MENU_SCENE = "Menu";
+    
     public int Score
     {
         get => score;
@@ -32,7 +33,7 @@ public class Game : MonoBehaviour
     {
         Score = (int)Time.timeSinceLevelLoad;
     }
-
+    
     private void Start()
     {
         SetHighscore();
@@ -41,23 +42,42 @@ public class Game : MonoBehaviour
         {
             GameEnded += ShowLossPanel;
             GameEnded += UpdateHighscore;
+            GameEnded += WaitAfterLoss;
         }
     }
 
     public void StartNewGame()
     {
         SceneManager.LoadScene(GAMEPLAY_SCENE);
+        Time.timeScale = 1;
     }
 
     private void ShowLossPanel()
     {
         lossPanel.SetActive(true);
-        Time.timeScale = 0;
     }
 
     public static void EndGame()
     {
         GameEnded.Invoke();
+        Time.timeScale = 0;
+        Handheld.Vibrate();
+    }
+
+    private void WaitAfterLoss()
+    {
+        StartCoroutine(DelayEndGame());
+    }
+
+    private IEnumerator DelayEndGame()
+    {
+        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitUntil(() => Input.touchCount > 0);
+
+        GameEnded -= ShowLossPanel;
+        GameEnded -= UpdateHighscore;
+        GameEnded -= WaitAfterLoss;
+        SceneManager.LoadScene(MENU_SCENE);
     }
 
     private void SetHighscore()

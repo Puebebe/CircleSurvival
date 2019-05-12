@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -36,7 +35,7 @@ public class Game : MonoBehaviour
     
     private void Start()
     {
-        SetHighscore();
+        SetHighscoreUI();
 
         if (SceneManager.GetActiveScene().name == GAMEPLAY_SCENE)
         {
@@ -80,7 +79,7 @@ public class Game : MonoBehaviour
         SceneManager.LoadScene(MENU_SCENE);
     }
 
-    private void SetHighscore()
+    private void SetHighscoreUI()
     {
         if (PlayerPrefs.HasKey("highscore"))
         {

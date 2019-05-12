@@ -72,7 +72,7 @@ public class Game : MonoBehaviour
     private IEnumerator DelayEndGame()
     {
         yield return new WaitForSecondsRealtime(1);
-        yield return new WaitUntil(() => Input.touchCount > 0);
+        yield return new WaitUntil(() => Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended);
 
         GameEnded -= ShowLossPanel;
         GameEnded -= UpdateHighscore;

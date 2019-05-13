@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +11,7 @@ public class CircleSpawner : MonoBehaviour
     [SerializeField] private RectTransform HUD;
     [SerializeField] private float spawnDelay = 3;
     private float spawnTimer = 0;
+    private float NewSpawnDelay => spawnDelay - 3 * spawnDelay / 28;
     private List<Vector2> spawnPositions = new List<Vector2>();
 
     private void Start()
@@ -46,6 +47,7 @@ public class CircleSpawner : MonoBehaviour
             newCircle.GetComponent<RectTransform>().position = newPosition;
             
             spawnTimer = 0;
+            spawnDelay = NewSpawnDelay;
         }
     }
 

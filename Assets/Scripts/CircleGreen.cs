@@ -9,7 +9,7 @@ public class CircleGreen : Circle
     {
         lifespan = Random.Range(2f, 4f);
         fill = transform.GetChild(0).GetComponent<Image>();
-        GetComponent<Button>().onClick.AddListener(Delete);
+        GetComponent<Button>().onClick.AddListener(() => Destroy(gameObject));
     }
 
     private new void Update()
@@ -20,7 +20,6 @@ public class CircleGreen : Circle
 
     protected override void Die()
     {
-        Debug.Log("przegranko (zielone)");
         Destroy(gameObject);
         Game.EndGame();
     }
@@ -28,10 +27,5 @@ public class CircleGreen : Circle
     private void SetFillAmount()
     {
         fill.fillAmount = lifetime / lifespan;
-    }
-
-    private void Delete()
-    {
-        Destroy(gameObject);
     }
 }

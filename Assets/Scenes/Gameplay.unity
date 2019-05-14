@@ -939,6 +939,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92661f6680cc5704082e7f123421dccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  game: {fileID: 1562895132}
   circleGreenPrefab: {fileID: 8775718840765359072, guid: e2bb2a123f133a34f8524fc62f5adb26,
     type: 3}
   circleBlackPrefab: {fileID: 4663686625180751126, guid: d3e97e701d816c645bcbbe5f32a58a0d,

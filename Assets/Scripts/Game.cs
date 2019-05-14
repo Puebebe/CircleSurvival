@@ -102,5 +102,4 @@ public class Game : MonoBehaviour
             highscoreUI.gameObject.SetActive(true);
         }
     }
-
 }

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +13,8 @@ public class CircleSpawner : MonoBehaviour
     private float spawnTimer = 0;
     private List<Vector2> spawnPositions = new List<Vector2>();
 
-    public float SpawnDelay { get => 3 - 3f * game.Score / 28f; }
+    public float SpawnDelay { get => 3 / (game.Score - (-1f)) + 0.2f; }
+
     private void Start()
     {
         for (int i = 0; i < parent.childCount; i++)

@@ -32,8 +32,8 @@ public class CircleSpawner : MonoBehaviour
         {
             GameObject circlePrefab = Random.Range(0, 10) > 0 ? circleGreenPrefab : circleBlackPrefab;
             Vector2 circleSize = circlePrefab.GetComponent<RectTransform>().rect.size;
-            float posX = Random.Range(0 + circleSize.x, canvas.rect.width - circleSize.x);
-            float posY = Random.Range(0 + circleSize.y, canvas.rect.height - HUD.rect.height - circleSize.y);
+            float posX = Random.Range(0 + circleSize.x / 2, canvas.rect.width - circleSize.x / 2);
+            float posY = Random.Range(0 + circleSize.y / 2, canvas.rect.height - HUD.rect.height - circleSize.y / 2);
             Vector3 newPosition = new Vector2(posX, posY);
 
             foreach (Vector2 position in spawnPositions)

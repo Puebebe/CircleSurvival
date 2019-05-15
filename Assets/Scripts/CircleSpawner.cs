@@ -14,14 +14,17 @@ public class CircleSpawner : MonoBehaviour
     private List<Vector2> spawnPositions = new List<Vector2>();
     private float SpawnDelay { get => 3 / (game.Score - (-1f)) + 0.2f; }
     private float MinLifespanGreen { get => 100f / (game.Score - (-66f)) + 0.5f; }
+    private Vector2 resolutionScale;
 
     private void Start()
     {
+        resolutionScale = canvas.GetComponent<RectTransform>().localScale;
+
         for (int i = 0; i < parent.childCount; i++)
         {
             var circle = parent.GetChild(i);
             Vector2 position = circle.GetComponent<RectTransform>().position;
-            spawnPositions.Add(position);
+            spawnPositions.Add(position * resolutionScale);
             StartCoroutine(ClearSpawnPosition(position, circle.GetComponent<Circle>().Lifespan));
         }
     }
@@ -33,8 +36,8 @@ public class CircleSpawner : MonoBehaviour
         {
             GameObject circlePrefab = Random.Range(0, 10) > 0 ? circleGreenPrefab : circleBlackPrefab;
             Vector2 circleSize = circlePrefab.GetComponent<RectTransform>().rect.size;
-            float posX = Random.Range(0 + circleSize.x / 2, canvas.rect.width - circleSize.x / 2);
-            float posY = Random.Range(0 + circleSize.y / 2, canvas.rect.height - HUD.rect.height - circleSize.y / 2);
+            float posX = Random.Range(0 + circleSize.x / 2, canvas.rect.width - circleSize.x / 2) * resolutionScale.x;
+            float posY = Random.Range(0 + circleSize.y / 2, canvas.rect.height - HUD.rect.height - circleSize.y / 2) * resolutionScale.y;
             Vector3 newPosition = new Vector2(posX, posY);
 
             foreach (Vector2 position in spawnPositions)

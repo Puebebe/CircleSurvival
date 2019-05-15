@@ -5,9 +5,13 @@ public class CircleGreen : Circle
 {
     private Image fill;
 
+    public void SetLifespan(float min = 2, float max = 4)
+    {
+        Lifespan = Random.Range(min, max);
+    }
+
     private void Start()
     {
-        lifespan = Random.Range(2f, 4f);
         fill = transform.GetChild(0).GetComponent<Image>();
         GetComponent<Button>().onClick.AddListener(() => Destroy(gameObject));
     }
@@ -26,6 +30,6 @@ public class CircleGreen : Circle
 
     private void SetFillAmount()
     {
-        fill.fillAmount = lifetime / lifespan;
+        fill.fillAmount = Lifetime / Lifespan;
     }
 }

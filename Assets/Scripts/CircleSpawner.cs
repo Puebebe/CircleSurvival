@@ -12,8 +12,8 @@ public class CircleSpawner : MonoBehaviour
     [SerializeField] private RectTransform HUD;
     private float spawnTimer = 0;
     private List<Vector2> spawnPositions = new List<Vector2>();
-
-    public float SpawnDelay { get => 3 / (game.Score - (-1f)) + 0.2f; }
+    private float SpawnDelay { get => 3 / (game.Score - (-1f)) + 0.2f; }
+    private float MinLifespanGreen { get => 100f / (game.Score - (-66f)) + 0.5f; }
 
     private void Start()
     {
@@ -22,7 +22,7 @@ public class CircleSpawner : MonoBehaviour
             var circle = parent.GetChild(i);
             Vector2 position = circle.GetComponent<RectTransform>().position;
             spawnPositions.Add(position);
-            StartCoroutine(ClearSpawnPosition(position, circle.GetComponent<Circle>().lifespan));
+            StartCoroutine(ClearSpawnPosition(position, circle.GetComponent<Circle>().Lifespan));
         }
     }
 
@@ -42,9 +42,10 @@ public class CircleSpawner : MonoBehaviour
                     return;
 
             GameObject newCircle = Instantiate(circlePrefab, parent);
+            newCircle.GetComponent<CircleGreen>()?.SetLifespan(MinLifespanGreen);
 
             spawnPositions.Add(newPosition);
-            StartCoroutine(ClearSpawnPosition(newPosition, newCircle.GetComponent<Circle>().lifespan));
+            StartCoroutine(ClearSpawnPosition(newPosition, newCircle.GetComponent<Circle>().Lifespan));
             newCircle.GetComponent<RectTransform>().position = newPosition;
             
             spawnTimer = 0;

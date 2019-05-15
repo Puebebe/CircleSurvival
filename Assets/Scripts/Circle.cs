@@ -2,13 +2,13 @@
 
 public class Circle : MonoBehaviour
 {
-    public float lifespan = 3;
-    protected float lifetime = 0;
+    public float Lifespan { get; protected set; } = 3;
+    protected float Lifetime { get; private set; }
 
     protected void Update()
     {
-        lifetime += Time.deltaTime;
-        if (lifetime >= lifespan)
+        Lifetime += Time.deltaTime;
+        if (Lifetime >= Lifespan)
             Die();
     }
 

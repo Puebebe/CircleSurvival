@@ -45,7 +45,7 @@ public class CircleSpawner : MonoBehaviour
                     return;
 
             GameObject newCircle = Instantiate(circlePrefab, parent);
-            newCircle.GetComponent<CircleGreen>()?.SetLifespan(MinLifespanGreen);
+            newCircle.GetComponent<CircleGreen>()?.SetLifespan(MinLifespanGreen, MinLifespanGreen + 2);
 
             spawnPositions.Add(newPosition);
             StartCoroutine(ClearSpawnPosition(newPosition, newCircle.GetComponent<Circle>().Lifespan));

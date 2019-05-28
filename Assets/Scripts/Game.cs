@@ -10,8 +10,6 @@ public class Game : MonoBehaviour
     [SerializeField] private Text highscoreUI;
     [SerializeField] private GameObject lossPanel;
     private static event Action GameEnded;
-    private const string GAMEPLAY_SCENE = "Gameplay";
-    private const string MENU_SCENE = "Menu";
     
     public int Score
     {
@@ -37,7 +35,7 @@ public class Game : MonoBehaviour
     {
         SetHighscoreUI();
 
-        if (SceneManager.GetActiveScene().name == GAMEPLAY_SCENE)
+        if (SceneManager.GetActiveScene().buildIndex == (int)Scenes.Gameplay)
         {
             GameEnded += ShowLossPanel;
             GameEnded += UpdateHighscore;
@@ -47,7 +45,7 @@ public class Game : MonoBehaviour
 
     public void StartNewGame()
     {
-        SceneManager.LoadScene(GAMEPLAY_SCENE);
+        SceneManager.LoadScene((int)Scenes.Gameplay);
         Time.timeScale = 1;
     }
 
@@ -76,7 +74,7 @@ public class Game : MonoBehaviour
         GameEnded -= ShowLossPanel;
         GameEnded -= UpdateHighscore;
         GameEnded -= WaitAfterLoss;
-        SceneManager.LoadScene(MENU_SCENE);
+        SceneManager.LoadScene((int)Scenes.Menu);
     }
 
     private void SetHighscoreUI()

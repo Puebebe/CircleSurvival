@@ -34,7 +34,7 @@ public class Game : MonoBehaviour
     private void Start()
     {
         SetHighscoreUI();
-
+        
         if (SceneManager.GetActiveScene().buildIndex == (int)Scenes.Gameplay)
         {
             GameEnded += ShowLossPanel;
@@ -79,13 +79,7 @@ public class Game : MonoBehaviour
 
     private void SetHighscoreUI()
     {
-        if (PlayerPrefs.HasKey("highscore"))
-        {
-            highscore = PlayerPrefs.GetInt("highscore");
-        }
-        else
-            highscore = 0;
-
+        highscore = PlayerPrefs.GetInt(Prefs.Highscore.ToString(), 0);
         highscoreUI.text = "" + highscore;
     }
 
@@ -94,7 +88,7 @@ public class Game : MonoBehaviour
         if (score > highscore)
         {
             highscore = score;
-            PlayerPrefs.SetInt("highscore", score);
+            PlayerPrefs.SetInt(Prefs.Highscore.ToString(), score);
             PlayerPrefs.Save();
             highscoreUI.text = "" + highscore;
             highscoreUI.gameObject.SetActive(true);
